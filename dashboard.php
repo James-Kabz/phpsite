@@ -3,7 +3,6 @@ session_start();
 
 $session_timeout = 900;
 
-
 function isAuthenticated() {
     global $session_timeout;
     if (isset($_SESSION['user_id']) && isset($_SESSION['last_activity'])) {
@@ -13,6 +12,7 @@ function isAuthenticated() {
         } else {
             session_unset();
             session_destroy();
+            return false; // Return false if session times out
         }
     }
     return false;
@@ -43,6 +43,29 @@ if (!isAuthenticated()) {
     <?php
     include('topnav.php');
     ?>  
+    <div>
+        <?php
+        include('viewusers.php');
+        ?>
     </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <?php 
+    
+    if (isset($_SESSION['message'])): ?>
+        <script>
+            Toastify({
+                text: "<?php echo $_SESSION['message']; ?>",
+                duration: 3000,
+                gravity: "top",
+                position: 'right',
+                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                stopOnFocus: true
+            }).showToast();
+        </script>
+        <?php 
+        unset($_SESSION['message']); 
+    endif; ?>
 </body>
 </html>

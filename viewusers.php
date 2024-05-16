@@ -7,44 +7,46 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-500">
     <?php include("sidebar.php"); ?>
 
-    <div class="main-content flex flex-col min-h-screen">
-        <?php include("topnav.php"); ?>
-        <div class="mx-auto p-6">
-            <h1 class="text-3xl font-bold mb-6">View Appointments</h1>
-            <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">UserName</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <?php
-                        include("connection.php");
-                        $sql = "SELECT * FROM admins";
-                        $result = mysqli_query($conn, $sql);
+    <div class="ml-28 flex flex-col items-center min-h-screen">
+        <div class="mx-auto ">
+            <h1 class="text-3xl font-bold mb-6 text-center">View Appointments</h1>
+            <!-- Table displaying users -->
+<div class="overflow-x-auto bg-blue-500 shadow-md rounded-lg">
+    <table class="w-full divide-y divide-gray-900">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">UserName</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            <!-- php code for displaying details and the necessary buttons -->
+            <?php
+            include("connection.php");
+            $sql = "SELECT * FROM admins";
+            $result = mysqli_query($conn, $sql);
 
-                        while($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>";
-                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . $row["username"] . "</td>";
-                            echo "<td class='px-6 py-4 whitespace-nowrap'>" . $row["email"] . "</td>";
-                            echo "<td class='px-6 py-4 whitespace-nowrap'>
-                                    <button class='bg-blue-500 text-white px-3 py-1 rounded-md mr-2' onclick='openUpdateModal(\"" . $row["id"] . "\", \"" . $row["username"] . "\", \"" . $row["email"] . "\")'>Update</button>
-                                    <button class='bg-red-500 text-white px-3 py-1 rounded-md' onclick='openDeleteModal(\"" . $row["id"] . "\")'>Delete</button>
-                                  </td>";
-                            echo "</tr>";
-                        }
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                echo "<td class='px-6 py-4 whitespace-nowrap'>" . $row["username"] . "</td>";
+                echo "<td class='px-6 py-4 whitespace-nowrap'>" . $row["email"] . "</td>";
+                echo "<td class='px-6 py-4 whitespace-nowrap'>
+                    <button class='bg-blue-500 text-white px-3 py-1 rounded-md mr-2' onclick='openUpdateModal(\"" . $row["id"] . "\", \"" . $row["username"] . "\", \"" . $row["email"] . "\")'>Update</button>
+                    <button class='bg-red-500 text-white px-3 py-1 rounded-md' onclick='openDeleteModal(\"" . $row["id"] . "\")'>Delete</button>
+                    </td>";
+                echo "</tr>";
+            }
 
-                        mysqli_close($conn);
-                        ?>
-                    </tbody>
-                </table>
-            </div>
+            mysqli_close($conn);
+            ?>
+        </tbody>
+    </table>
+</div>
+
         </div>
     </div>
 
@@ -111,6 +113,7 @@
         <?php endif; ?>
     </div>
 
+    <!-- JS Code for opening and clossing modals -->
     <script>
         function openUpdateModal(id, username, email) {
             document.getElementById('updateUserId').value = id;

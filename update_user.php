@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST["username"];
     $email = $_POST["email"];
 
-    // Perform update operation in the database
+    //update operation in the database
     $sql = "UPDATE admins SET username=?, email=? WHERE id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssi", $username, $email, $userId);
