@@ -1,28 +1,4 @@
-<?php
-session_start();
 
-$session_timeout = 900;
-
-
-function isAuthenticated() {
-    global $session_timeout;
-    if (isset($_SESSION['user_id']) && isset($_SESSION['last_activity'])) {
-        if ((time() - $_SESSION['last_activity']) < $session_timeout) {
-            $_SESSION['last_activity'] = time(); 
-            return true;
-        } else {
-            session_unset();
-            session_destroy();
-        }
-    }
-    return false;
-}
-
-if (!isAuthenticated()) {
-    header("Location: login_form.php");
-    exit();
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +20,7 @@ if (!isAuthenticated()) {
         <?php
         include('topnav.php');
         ?>
-        <div class="container mx-auto p-6">
+        <div class="container2 mx-auto p-6">
             <h1 class="text-3xl font-bold mb-6 text-center">Welcome! Here Is the new Toyota Prado 2024</h1>
             <div class="car-image flex justify-center mb-6">
                 <img src="2024-toyota-land-cruiser-prado-002-tuqa.jpg" alt="Car" class="rounded-lg shadow-lg">

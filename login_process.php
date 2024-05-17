@@ -1,7 +1,6 @@
 <?php
-session_start();
 include("connection.php");
-
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -15,21 +14,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row["password"])) {
-            $_SESSION['user_id'] = $row['id'];
-            $_SESSION['username'] = $username;
-            $_SESSION['last_activity'] = time(); 
+            $_SESSION["username"] = $username;
+            $_SESSION["role"] = $row["role"];
             $_SESSION['message'] = "Login successful! Welcome $username.";
-            header("Location: welcome.php");
+            
+            if ($row["role"] == 'admin') {
+                header("Location: admin_dashboard.php");
+            } else {
+                header("Location: user_dashboard.php");
+            }
             exit();
         } else {
             $_SESSION['message'] = "Invalid password!";
             header("Location: login_form.php");
-            exit();
         }
     } else {
         $_SESSION['message'] = "User not found!";
         header("Location: login_form.php");
-        exit();
     }
 }
 

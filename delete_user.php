@@ -3,11 +3,11 @@ session_start();
 include("connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $userId = $_POST["user_id"];
+    $id = $_POST["id"];
 
     $sql = "DELETE FROM admins WHERE id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
+    $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
         $_SESSION['message'] = "User deleted successfully";

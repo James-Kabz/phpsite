@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +11,7 @@
 <body class="bg-gray-100">
     <?php include('sidebar.php'); ?>
     <div class="main-content flex flex-col min-h-screen">
-        <?php include('topnav.php'); ?>
-        <div class="container mx-auto p-6">
+        <div class="container2 mx-auto p-6">
             <div class=" flex justify-center mb-6">
                 <img src="mana.jpeg" alt="About Us Image" class="max-w-xs md:max-w-md rounded-lg shadow-lg">
             </div>
