@@ -26,11 +26,8 @@ $jobs = $result->fetch_all(MYSQLI_ASSOC);
     <?php include("sidebar.php");?>
 
     <!-- Main content -->
-    <div class="container mx-auto mt- px-4">
-        <h1 class="text-2xl font-bold mb-4">Admin Dashboard</h1>
-
-        <!-- Post a Job Section -->
-        <h2 class="text-xl">Post a Job</h2>
+    <div class="container mx-auto px-10">
+        <h1 class="text-2xl font-bold mb-4">Post A Job</h1>
         <form method="post" action="post_job.php" class="mt-4">
             <div class="mb-4">
                 <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Job Title</label>
