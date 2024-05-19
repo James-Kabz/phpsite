@@ -6,8 +6,8 @@ if ($_SESSION["role"] != 'admin') {
     exit();
 }
 
-// Fetch applicants with their job titles
-$sql = "SELECT applications.username, applications.application_text, jobs.title 
+// applicants with their job applications
+$sql = "SELECT applications.id, applications.username, applications.application_text, jobs.title 
         FROM applications 
         JOIN jobs ON applications.job_id = jobs.job_id";
 $result = $conn->query($sql);
@@ -21,14 +21,15 @@ $applicants = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Applicants</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="bg-gray-500 min-h-screen flex flex-col">
 
     <?php include("sidebar.php");?>
 
-    <!-- Main content -->
-    <div class="flex-1 content mx-auto mt-10 px-4">
-        <h1 class="text-4xl font-bold mb-6 text-gray-800">Applicants</h1>
+    <!-- display applicants -->
+    <div class="content mx-auto mt-10 px-4">
+        <h1 class="text-4xl font-bold mb-6 text-gray-200">Applicants</h1>
         <div class="bg-white shadow-md rounded-lg p-6">
             <table class="min-w-full leading-normal">
                 <thead>
@@ -44,6 +45,13 @@ $applicants = $result->fetch_all(MYSQLI_ASSOC);
                             <td class="px-5 py-5 border-b border-gray-200 text-3xl text-gray-700 font-extrabold"><?php echo htmlspecialchars($applicant['username']); ?></td>
                             <td class="px-5 py-5 border-b border-gray-200 text-2xl text-gray-700 font-bold"><?php echo htmlspecialchars($applicant['title']); ?></td>
                             <td class="px-5 py-5 border-b border-gray-200 text-xl text-gray-700 font-semibold"><?php echo htmlspecialchars($applicant['application_text']); ?></td>
+                            <!-- <td>                    <form action="delete_application.php" method="post" onsubmit="return confirm('Are you sure you want to delete this job?');">
+                        <input type="hidden" name="id" value="<?php echo $applicant['id']; ?>">
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Delete
+                        </button>
+                    </form></td> -->
+                            
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -51,9 +59,7 @@ $applicants = $result->fetch_all(MYSQLI_ASSOC);
         </div>
     </div>
 
-    <footer class="bg-gray-800 text-white text-center py-4">
-        © 2023 Your Company. All rights reserved.
-    </footer>
+    <?php include("footer.php");?>
     
 </body>
 </html>

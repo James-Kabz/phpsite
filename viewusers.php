@@ -11,24 +11,24 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-500">
+<body class="bg-black flex flex-col justify-between">
     <?php include("sidebar.php"); ?>
 
 
-    <div class="container flex flex-col items-center min-h-screen ml-96">
-        <div class="w-full px-4">
+    <div class="ml-80 bg-gray-800">
+        <div class="w-full px-4 bg-gray-800">
             <h1 class="text-3xl font-bold mb-6 text-center text-white">View Users</h1>
             <!-- Table displaying users -->
             <div class="overflow-x-auto shadow-md rounded-lg font-bold">
                 <table class="w-full divide-y divide-gray-900">
-                    <thead class="bg-gray-50">
+                    <thead class="bg-gray-900">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">UserName</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider">UserName</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider">Email</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="bg-gray-800 divide-y divide-gray-200 text-white">
                         <!-- php code for displaying details and the necessary buttons -->
                         <?php
                         include("connection.php");
@@ -74,7 +74,7 @@ session_start();
                         <input type="email" id="updateEmail" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                     <div class="mt-4">
-                        <button type="submit" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white">Update</button>
+                        <button type="submit" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white"></button>
                         <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 mt-2 bg-gray-600 text-base font-medium text-white" onclick="closeUpdateModal()">Cancel</button>
                     </div>
                 </form>
@@ -143,5 +143,6 @@ session_start();
         <?php 
         unset($_SESSION['message']); 
     endif; ?>
+    <?php include("footer.php");?>
 </body>
 </html>

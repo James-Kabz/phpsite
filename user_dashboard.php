@@ -36,8 +36,8 @@ $jobs = $conn->query("SELECT * FROM jobs")->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto mt-10 px-4 md:px-10 lg:px-20">
-        <h1 class="text-2xl font-bold mb-6">Welcome</h1>
+    <div class="mx-auto justify-between mt-10 px-4 md:px-10 lg:px-20">
+        <h1 class="text-2xl font-bold mb-6">Welcome To Allumini Center</h1>
 
     <div class="float-right">
         <form action="logout.php" method="POST">
@@ -46,7 +46,7 @@ $jobs = $conn->query("SELECT * FROM jobs")->fetch_all(MYSQLI_ASSOC);
     </div>
     <br>
     <br>
-        <h2 class="text-4xl mt-5">Here's are the Available Jobs</h2>
+        <h2 class="text-4xl mt-5">Here are the Available Jobs For You</h2>
         <ul class="mt-5 space-y-6">
             <?php foreach ($jobs as $job): ?>
                 <li class="border-b py-6">
@@ -61,6 +61,8 @@ $jobs = $conn->query("SELECT * FROM jobs")->fetch_all(MYSQLI_ASSOC);
             <?php endforeach; ?>
         </ul>
     </div>
+
+    <?php include("footer.php")?>
 
     <!-- Include Toastify JS -->
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
